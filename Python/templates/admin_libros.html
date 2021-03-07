@@ -1,0 +1,131 @@
+{% extends "layout.html" %}
+{% block body %}
+<hr>
+<div class="mt-5 container">
+        
+    <div class="container">
+        <h5>Buscar autor id:</h5>
+
+        <form method="POST" action="{{ url_for('libros_autores.buscar_autor_id')}}">
+            <div class="row">
+                <div class="col">
+                    <label for="nombre">Ingrese el nombre del autor</label>
+                    <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre">
+                </div>
+                <div class="col">
+                    <label for="apellido">Ingrese el apellido del autor</label>
+                    <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Apellido">
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="pt-2 container d-flex justify-content-center">
+                    <button class="btn btn-outline-secondary" type="submit" name="Btn_Buscar">Buscar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="container pt-2">
+        {% if data_autor %}
+        <h5>Resultado</h5>
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Autor ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for categoria in data_autor %}
+                <tr class="table-warning">
+                    {% for element in categoria %}
+                    <td>{{ element }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+
+    
+    
+    <div class="container pt-4">
+        <h5>Añadir Libro:</h5>
+        
+        <form method="POST" action="{{url_for('libros_autores.admin_libros')}}">
+        
+            <div class="row">
+                <div class="col-3">
+                    <label for="autor_id">Autor ID</label>
+                    <input type="text" class="form-control" name="autor_id" id="autor_id" placeholder="Autor ID">
+                </div>
+                <div class="col-9">
+                    <label for="titulo">Título</label>
+                    <input type="text" class="form-control" name="titulo" id = "titulo" placeholder="Título">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label for="descripcion">Descripción</label>
+                    <input type="text" class="form-control" name="descripcion" id = "descripcion" placeholder="Diponible o No Disponible">
+                </div>
+                <div class="col">
+                    <label for="fecha_publicacion">Fecha Publicación</label>
+                    <input type="text" class="form-control" name="fecha_publicacion" id = "fecha_publicacion" placeholder="2021-03-06">
+                </div>
+                <div class="col">
+                    <label for="ventas">Ventas</label>
+                    <input type="text" class="form-control" name="ventas" id = "ventas" placeholder="Ventas" value="0">
+                </div>
+                <div class="col">
+                    <label for="stock">Stock</label>
+                    <input type="text" class="form-control" name="stock" id = "stock" placeholder="Stock">
+                </div>
+            </div>
+        
+            <div class="row">
+                <div class="pt-2 container d-flex justify-content-center">
+                    <button class="btn btn-outline-primary" type="submit" name="Btn_Guardar">Guardar</button>
+                </div>
+            </div>
+        
+        </form>
+
+    </div>
+    
+    <div class="container pt-4">
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Libro ID</th>
+                    <th>Autor ID</th>
+                    <th>Título</th>
+                    <th>Descripción</th>
+                    <th>Fecha Publicación</th>
+                    <th>Ventas</th>
+                    <th>Stock</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for categoria in data %}
+                <tr class="table-primary">
+                    {% for element in categoria %}
+                    <td>{{ element }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+    </div>
+    <br>
+    <br>
+</div>
+
+
+
+{% endblock %}

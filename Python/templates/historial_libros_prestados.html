@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<hr>
+<div class="mt-5 container">
+    {% if data_libro_prestados %}
+    <h5>Libros prestados</h5>
+
+    <table class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Libro ID</th>
+                <th>Usuario ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Titulo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for categoria in data_libro_prestados %}
+            <tr class="table-primary">
+                {% for element in categoria %}
+                <td>{{ element }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    {% endif %}
+    <br>
+    <br>
+</div>
+
+{% endblock %}

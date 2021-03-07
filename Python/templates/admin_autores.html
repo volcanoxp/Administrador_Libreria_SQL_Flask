@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<hr>
+<div class="mt-5 container">
+    
+    <div class="container">
+
+        <form method="POST" action="{{url_for('libros_autores.admi_autores')}}">
+            <h4>Añadir autor:</h4>
+            <div class="row">
+                <div class="col">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre">
+                </div>
+                <div class="col">
+                    <label for="apellido">Apellido</label>
+                    <input type="text" class="form-control" name="apellido" id = "apellido" placeholder="Apellido">
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col">
+                    <label for="seudonimo">Seudónimo</label>
+                    <input type="text" class="form-control" name="seudonimo" id = "seudonimo" placeholder="Seudónimo">
+                </div>
+                <div class="col">
+                    <label for="genero">Género</label>
+                    <input type="text" class="form-control" name="genero" id = "genero" placeholder="M-F">
+                </div>
+                <div class="col">
+                    <label for="pais">País</label>
+                    <input type="text" class="form-control" name="pais" id = "pais" placeholder="País">
+                </div>
+            </div>
+        
+            <div class="row">
+                <div class="pt-2 container d-flex justify-content-center">
+                    <button class="p-2 btn btn-outline-primary" type="submit" name="Btn_Guardar">Guardar</button>
+                </div>
+            </div>
+        
+        </form>
+    </div>
+    
+    <div class="container pt-4">
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr class="mx-auto">
+                    <th>Autor ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Seudónimo</th>
+                    <th>Género</th>
+                    <th>País</th>
+                    <th>Fecha creación</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for categoria in data %}
+                <tr class="table-primary">
+                    {% for element in categoria %}
+                    <td>{{ element }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+    <br>
+    <br>
+</div>
+
+    
+
+{% endblock %}

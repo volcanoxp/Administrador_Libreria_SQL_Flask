@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block body %}
+<hr>
+<div class="mt-5 container">
+    {% if data_historial_user %}
+    <h5>Historial usuarios</h5>
+    
+    <table class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Usuario ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Total prestamos</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for categoria in data_historial_user %}
+            <tr class="table-primary">
+                {% for element in categoria %}
+                <td>{{ element }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif%}
+    <br>
+    <br>
+</div>
+
+
+
+{% endblock %}

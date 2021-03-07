@@ -1,0 +1,250 @@
+{% extends "layout.html" %}
+{% block body %}
+<hr>
+<div class="mt-5 container">
+    <div class="container mb-4">
+        <div class="row">
+            <div class="col">
+                <div class="container d-flex justify-content-center">
+                    <a class="btn btn-outline-secondary" href="{{url_for('usuarios.historial_libros_usuarios')}}">Ver historial total de libros prestados</a>
+                </div>
+
+            </div>
+            <div class="col">
+                <div class="container d-flex justify-content-center">
+                    <a class="btn btn-outline-secondary" href="{{url_for('usuarios.historial_usuarios')}}">Ver historial total de usuarios</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    {% if mensaje_prestamo %}
+    <div class="alert alert-success alert-dismissible fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{mensaje_prestamo}}
+    </div>
+    {% endif%}
+    
+    {% if mensaje_devolucion %}
+    <div class="alert alert-success alert-dismissible fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{mensaje_devolucion}}
+    </div>
+    {% endif%}
+    
+    <div class="container">
+        <form method="POST" action="{{url_for('usuarios.admin_prestamos_devoluciones')}}">
+            <div class="row">
+                <div class="col-5">
+                    <h5>Consulta Libro:</h5>
+                    <div class="row">
+                        <div class="col">
+                            <label for="libro_id">Libro ID</label>
+                            <input type="text" class="form-control" name="libro_id" id="libro_id" placeholder="Libro ID" >
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="titulo">Título</label>
+                            <input type="text" class="form-control" name="titulo" id = "titulo" placeholder="Titulo">
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <h5>Consulta Usuario:</h5>
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="usuario_id">Usuario ID</label>
+                            <input type="text" class="form-control" name="usuario_id" id = "usuario_id" placeholder="Usuario ID" >
+                        </div>
+                        <div class="col-8">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" class="form-control" name="nombre" id = "nombre" placeholder="Nombre">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="correo">Correo</label>
+                            <input type="text" class="form-control" name="correo" id = "correo" placeholder="Correo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="pt-2 container d-flex justify-content-center">
+                    <button class="btn btn-outline-secondary" type="submit" name="Btn_Buscar">Buscar</button>
+                </div>
+            </div>
+        
+        </form>
+    </div>
+    
+    
+    <div class="pt-2 container">
+        
+        <div class="row">
+            {% if data_libro %}
+            <div class="col-7">
+                <h5>libro</h5>
+                
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Libro ID</th>
+                            <th>Título</th>
+                            <th>Autor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for categoria in data_libro %}
+                        <tr class="table-warning">
+                            {% for element in categoria %}
+                            <td>{{ element }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+            
+            {% if data_user %}
+            <div class="col-5">
+                <h5>Usuarios:</h5>
+                
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Usuario ID</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Correo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for categoria in data_user %}
+                        <tr class="table-warning">
+                            {% for element in categoria %}
+                            <td>{{ element }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+        </div>
+        
+        <div class="row">
+            {% if data_historial_user %}
+            <div class="col-5">
+                <h5>Historial usuarios:</h5>
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Usuario ID</th>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Total prestamos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for categoria in data_historial_user %}
+                        <tr class="table-primary">
+                            {% for element in categoria %}
+                            <td>{{ element }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endif%}
+            
+            {% if data_libro_prestados %}
+            <div class="col-7">
+                <h5>Libros prestados:</h5>
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Libro ID</th>
+                            <th>Usuario ID</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Titulo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for categoria in data_libro_prestados %}
+                        <tr class="table-primary">
+                            {% for element in categoria %}
+                            <td>{{ element }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="container pt-4">
+        <div class="row">
+            <div class="col">
+                <div class="container border border-primary rounded p-4">
+                    <h5>Prestamos:</h5>
+                    <form method="POST" action="{{url_for('usuarios.prestamos_libro')}}">
+                        <div class="row">
+                            <div class="col">
+                                <label for="libro_id">ID Libro</label>
+                                <input type="text" class="form-control" name="libro_id" id="libro_id" placeholder="ID Libro">
+                            </div>
+                            <div class="col">
+                                <label for="usuario_id">ID Usuario</label>
+                                <input type="text" class="form-control" name="usuario_id" id = "usuario_id" placeholder="ID Usuario">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="pt-2 container d-flex justify-content-center">
+                                <button class="btn btn-outline-primary" type="submit" name="Btn_Buscar">Prestar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="container border border-secondary rounded p-4">
+                    <h5>Devolución:</h5>
+                    <form method="POST" action="{{ url_for('usuarios.devolucion_libro')}}">
+                        <div class="row">
+                            <div class="col">
+                                <label for="libro_id">ID Libro</label>
+                                <input type="text" class="form-control" name="libro_id" id="libro_id" placeholder="ID Libro">
+                            </div>
+                            <div class="col">
+                                <label for="usuario_id">ID Usuario</label>
+                                <input type="text" class="form-control" name="usuario_id" id = "usuario_id" placeholder="ID Usuario">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="pt-2 container d-flex justify-content-center">
+                                <button class="btn btn-outline-primary" type="submit" name="Btn_Buscar">Devolver</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+</div>
+
+
+
+{% endblock %}
+
