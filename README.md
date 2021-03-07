@@ -2,7 +2,7 @@
 
 Este proyecto se usó las tecnologías de Mysql, Python3-flask y bootstrap 4.
 ## **Diseño que se implementará en nuestra base de datos mysql**
-![image](Imagenes/Topologia_SQL.PNG)
+![image](Imagenes/Topologia_SQL.png)
 
 ## **Para poder replicar este proyecto de seguir los siguientes pasos:**
 
